@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+.venv/
+venv/
+.env
+
+# Docker
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# Mac
+.DS_Store
