@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme {
+  --font-title: "Italianno", cursive;
+  --font-david: "David Libre", serif;
+  --color-batik: #A5472B;
+}
