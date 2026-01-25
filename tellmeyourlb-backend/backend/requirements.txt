@@ -38,5 +38,5 @@ typing_extensions==4.14.0
 urllib3==2.5.0
 uvicorn==0.34.3
 wcwidth==0.2.13
-gunicorn==19.7.1
+gunicorn>=21.2.0
 
