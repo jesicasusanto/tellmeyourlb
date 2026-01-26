@@ -9,8 +9,18 @@ from pydantic import BaseModel
 from utils import embed_text
 
 _backend_dir = Path(__file__).resolve().parent
-with open(_backend_dir / "brands_embedded.json") as f:
-    brands = json.load(f)
+brands = []
+app = FastAPI(
+    title="Brand Recommendation API",
+    description="Finds the most similar fashion brands based on style description",
+    version="1.0.0"
+)
+@app.on_event("startup")
+def load_brands():
+    global brands
+    with open(_backend_dir / "brands_embedded.json") as f:
+        brands = json.load(f)
+
 
 def cosine_similarity(vec1, vec2):
     vec1 = np.asarray(vec1, dtype=np.float32)
@@ -31,11 +41,7 @@ def find_best_matches(input_embedding: List[float], brands: List[Dict], top_k=5)
     scores.sort(key=lambda x: x["score"], reverse=True)
     return scores[:top_k]
 
-app = FastAPI(
-    title="Brand Recommendation API",
-    description="Finds the most similar fashion brands based on style description",
-    version="1.0.0"
-)
+
 
 _raw = os.getenv("CORS_ORIGINS", "").strip()
 _origins = [o.strip() for o in _raw.split(",") if o.strip()] if _raw else ["*"]
