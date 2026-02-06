@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+const API_URL = 'https://gaya-api.onrender.com'
 
 function getStylePills(styleDesc, max = 3) {
     if (!styleDesc) return []
