@@ -7,6 +7,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from utils import embed_text
+import psutil, os
+
+def log_mem():
+    process = psutil.Process(os.getpid())
+    print("Memory usage:", process.memory_info().rss / (1024*1024), "MB")
 
 _backend_dir = Path(__file__).resolve().parent
 brands = []
@@ -61,7 +66,7 @@ class QueryRequest(BaseModel):
 def recommend_brands(request: QueryRequest):
     input_embedding = embed_text(request.query)
     matches = find_best_matches(input_embedding, brands, top_k=request.top_k)
-
+    log_mem()
     return {"query": request.query, "results": matches}
 
 @app.get("/health")
