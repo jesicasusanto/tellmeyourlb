@@ -12,3 +12,4 @@ transformers>=4.38
 tqdm
 regex
 requests
+psutil

@@ -87,10 +87,12 @@ class QueryRequest(BaseModel):
 # ----------------------
 @app.post("/recommend")
 def recommend_brands(request: QueryRequest):
+    log_mem("before embedding query")
     input_embedding = embed_text(request.query)
     log_mem("after embedding query")  # memory after embedding
 
     matches = find_best_matches(input_embedding, brands, top_k=request.top_k)
+    log_mem("after finding match") 
     return {"query": request.query, "results": matches}
 
 # ----------------------
