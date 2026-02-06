@@ -59,8 +59,7 @@ class QueryRequest(BaseModel):
 
 @app.post("/recommend")
 def recommend_brands(request: QueryRequest):
-    text_features = embed_text(request.query)
-    input_embedding = text_features.cpu().numpy().tolist()[0]
+    input_embedding = embed_text(request.query)
     matches = find_best_matches(input_embedding, brands, top_k=request.top_k)
 
     return {"query": request.query, "results": matches}

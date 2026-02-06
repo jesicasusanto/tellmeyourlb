@@ -15,9 +15,6 @@ def load_model():
 
 def embed_text(text: str):
     model = load_model()
-    with torch.no_grad():
-        emb = model.encode(
-            text,
-            normalize_embeddings=True
-        )
+    emb = model.encode(text, normalize_embeddings=True)
     return emb.tolist()
+
